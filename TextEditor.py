@@ -2,7 +2,12 @@ from tkinter import *
 from tkinter import filedialog
 import os
 win = Tk()
-win.title("Text Editor")
+real_path = os.path.realpath(__file__)
+real_path = os.path.dirname(real_path)
+
+win.iconphoto(False, PhotoImage(
+    file=real_path + '\\Assets\\Notepad--.png'))
+win.title("Notepad--")
 width = 500
 height = 600
 win.geometry(str(width) + "x" + str(height))
@@ -12,7 +17,7 @@ def openfile():
     try:
         file = filedialog.askopenfilename(
             defaultextension=".txt", filetypes=[("All Files", "*.*"), ("Text File", "*.txt")])
-        file = open(currentfile)
+        file = open(file)
         file = file.read()
         text.delete(1.0, END)
         text.insert(END, file)
